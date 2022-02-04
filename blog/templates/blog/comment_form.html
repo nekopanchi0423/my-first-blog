@@ -1,0 +1,20 @@
+{% load widget_tweaks %}
+<div class="container col-lg-6 offset-lg-3">
+  <p class="titleline">{{ post.title }}</p>
+  <form action="" method="POST" id="comment-form">
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="field">
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+ 
+      {{ field.errors }}
+    </div>
+    {% endfor %}
+    {% csrf_token %}
+    <div class="row my-3">
+      <button type="submit" class="btn btn-success col-3 offset-2">投稿する</button>
+      <a class="btn btn-danger col-3 offset-2" href="{% url 'post_detail' post.pk %}">キャンセル</a>
+    </div>
+  </form>
+</div>

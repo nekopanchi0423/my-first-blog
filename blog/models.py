@@ -1,3 +1,4 @@
+from cgitb import text
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -16,3 +17,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    name = models.CharField('名前', max_length=255, default='名前はまだない')
+    text = models.TextField('本文')
+    target = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='対象記事')
+    created_at =models.DateTimeField('作成日', default=timezone.now)
+
+    def __str__(self):
+        return self.text[:20]

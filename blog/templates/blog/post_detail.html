@@ -13,5 +13,14 @@
         {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.text|linebreaksbr }}</p>
+        <p><a href="{% url 'comment_create' pk=post.pk %}">コメントする</a></p>
+        {% for comment in comments %}
+            <div class='border-bottom'>
+                {{ comment.name }} {{ comment.created_at }}
+            </div>
+            <div class='mt-2'>
+                {{ comment.text }}
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
